@@ -65,3 +65,8 @@ func (u Unsplash) SearchPhotos(query string) (common.SearchResult, error) {
 	json.Unmarshal(respBody, &result)
 	return result, nil
 }
+
+//DownloadAPhoto download a photo from unsplash
+func (u Unsplash) DownloadAPhoto(photoID string) {
+	// TODO: get download link for a photo from unsplash
+}
