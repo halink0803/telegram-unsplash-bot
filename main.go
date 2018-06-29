@@ -84,6 +84,24 @@ func (mybot *Bot) handle(update tgbotapi.Update) {
 	}
 }
 
+func inlineKeyboarButtons() tgbotapi.InlineKeyboardMarkup {
+	replyRow := []tgbotapi.InlineKeyboardButton{}
+	//like button
+	likeKeyboardButton := tgbotapi.NewInlineKeyboardButtonData("like", "like")
+	replyRow = append(replyRow, likeKeyboardButton)
+
+	//unlike button
+	unlikeKeyboardButton := tgbotapi.NewInlineKeyboardButtonData("unlike", "unlike")
+	replyRow = append(replyRow, unlikeKeyboardButton)
+
+	//download button
+	downloadKeyboardButton := tgbotapi.NewInlineKeyboardButtonData("download", "download")
+	replyRow = append(replyRow, downloadKeyboardButton)
+
+	buttons := tgbotapi.NewInlineKeyboardMarkup(replyRow)
+	return buttons
+}
+
 func (mybot *Bot) handleSearch(update tgbotapi.Update) {
 	arguments := update.Message.CommandArguments()
 	if len(arguments) == 0 {
@@ -98,6 +116,8 @@ func (mybot *Bot) handleSearch(update tgbotapi.Update) {
 	}
 	for _, photo := range results.Results {
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, photo.URLs.Regular)
+		buttons := inlineKeyboarButtons()
+		msg.ReplyMarkup = buttons
 		mybot.bot.Send(msg)
 	}
 }
