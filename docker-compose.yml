@@ -1,0 +1,7 @@
+
+version: '2'
+services:
+  unsplash_bot:
+    build: .
+    image: unsplash 
+    command: telegram-unsplash-bot 
