@@ -1,0 +1,882 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;shell&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
+            <a href="#apis" class="toc-h1 toc-link" data-title="APIS">APIS</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-time-server" class="toc-h2 toc-link" data-title="Get time server">Get time server</a>
+                  </li>
+                  <li>
+                    <a href="#get-all-addresses-are-being-used-by-core" class="toc-h2 toc-link" data-title="Get all addresses are being used by core">Get all addresses are being used by core</a>
+                  </li>
+                  <li>
+                    <a href="#get-prices-all-base-quote-pair" class="toc-h2 toc-link" data-title="Get prices all base-quote pair">Get prices all base-quote pair</a>
+                  </li>
+                  <li>
+                    <a href="#get-trade-history-for-an-account-signing-required" class="toc-h2 toc-link" data-title="Get trade history for an account (signing required)">Get trade history for an account (signing required)</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1><h1 id='authentication'>Authentication</h1>
+<p>All APIs that are marked with (signing required) must follow authentication mechanism below:</p>
+
+<ol>
+<li>Must be urlencoded (x-www-form-urlencoded)</li>
+<li>Must have <code>signed</code> header with value equals to <code>hmac512(secret, message)</code></li>
+<li>Must contain <code>nonce</code> param, its value is the unix time in millisecond, it must not be before or after server time by 10s</li>
+<li><code>message</code> is constructed in following way: all query params (nonce is included) and body key-values are merged into one urlencoded string with keys are sorted.</li>
+<li><code>secret</code> is configured secret string.</li>
+</ol>
+
+<p>Example:
+- param query: <code>amount=0xde0b6b3a7640000&amp;nonce=1514554594528&amp;token=KNC</code>
+- secret: <code>vtHpz1l0kxLyGc4R1qJBkFlQre5352xGJU9h8UQTwUTz5p6VrxcEslF4KnDI21s1</code>
+- signed string: <code>2969826a713d13b399dd0d016dad3e95949aa81ed8703ec0258abebb5f0288b96272eef68275f12a32f7e396de3b5fd63ed12b530385e08e1b676c695aacb93b</code></p>
+<h1 id='apis'>APIS</h1><h2 id='get-time-server'>Get time server</h2><pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"http://localhost:8000/timeserver"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1517479497447"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint return current time server</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET http://example.com/timeserver</code></p>
+<h2 id='get-all-addresses-are-being-used-by-core'>Get all addresses are being used by core</h2><pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"http://localhost:8000/core/addresses"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"tokens"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"EOS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x15fb2a9d7dadbb88f260f78dcbb574b3b76a8e06"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ETH"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"KNC"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x8dc114d77e857558aefbe8e1a50b460ff9578f1a"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"OMG"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x7606bd550f467546212649a9c25623dfca88dcd7"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"SALT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xcc112cd38362bf3c07d226768fd5869e65296083"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"SNT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x676f650000f420485b99ef0377a2e1c96eb3e821"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"exchanges"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"binance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"EOS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x1ae659f93ba2fc0a1f379545cf9335adb75fa547"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ETH"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x1ae659f93ba2fc0a1f379545cf9335adb75fa547"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"KNC"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x1ae659f93ba2fc0a1f379545cf9335adb75fa547"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"OMG"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x1ae659f93ba2fc0a1f379545cf9335adb75fa547"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"SALT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x1ae659f93ba2fc0a1f379545cf9335adb75fa547"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"SNT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x1ae659f93ba2fc0a1f379545cf9335adb75fa547"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"bittrex"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"EOS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xef6ee90c5bb23da2eb71b3daa8e57b204e5ac647"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ETH"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xe0355aa3cc0a4e0e4b2a70acd90c2fa961f61b23"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"KNC"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x132478f1ec4b8e1256b11fdf3e00d97e4df5988f"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"OMG"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x9db6e8d2d133448dbcf755f19d540253da4ba043"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"SALT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x385d619b530f00ab7d082683f7cdc37995ac76f2"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"SNT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x3ef96f9de64c44b1ad392b10e2277a73ec14ff5f"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"wrapper"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xa54f27b5a72fc1ddc5c4bc6ed50391f457e4a46a"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pricing"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x77925520469d0fcbb0311814c053bf9bafcd867b"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"reserve"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x2d1ceabd5a1cd16581ad199031601615a434a2cd"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"feeburner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xa33a2f0745ee8e31b753ec33d22d363a62a123a4"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x643211b405c9a14139142e1104250bbcd94bd0ef"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET http://example.com/core/addresses</code></p>
+<h2 id='get-prices-all-base-quote-pair'>Get prices all base-quote pair</h2><pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"http://localhost:8000/prices"</span>
+
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ADX-ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"bittrex"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Valid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114579228"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">1534.265</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00250437</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">1147.78359847</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00250435</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">426.37538021</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00250429</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">4850.84</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00277997</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">144.04135361</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00277998</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">14.50780994</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00278059</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"ReturnTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114579641"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"BAT-ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"bittrex"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Valid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114579228"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">15173.85912685</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00047374</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">130552</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00047363</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">2149.78448276</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0004734</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">660.96951182</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00048652</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">476.36673132</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00048663</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">53661.5</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00048668</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"ReturnTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114579480"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"CVC-ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"bittrex"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Valid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114579228"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">128.67287333</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00099655</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00098795</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">45.30924007</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00098539</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">153.22180315</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">7010.72355807</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00101567</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">2679.69026772</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00101568</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"ReturnTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114579642"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"DGD-ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"bittrex"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Valid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114579228"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.27508146</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.21463293</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">8.61103292</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.21463292</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.21462222</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.43683366</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.22554555</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.10879304</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.22554557</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.06252449</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.22554606</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"ReturnTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114579641"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"FUN-ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"bittrex"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Valid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114579228"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">3550.94852427</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00008065</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">24900</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00008064</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">489855.39183168</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00008063</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">3635.15493421</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00008282</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">3905.9918732</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00008293</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">1952.93876331</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00008366</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"ReturnTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114579574"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"GNT-ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"bittrex"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Valid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114579228"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1E-8</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0008552</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00084661</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">35.4</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0008466</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">7209.279</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00086879</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">399.58082001</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0008688</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">7185.948</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00086893</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"ReturnTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114579457"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"MCO-ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"bittrex"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Valid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114579228"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">142.93534777</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02437378</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.21116959</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02437377</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.63701658</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02437376</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">15.39680469</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02503471</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">18.71484714</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02503534</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">93.57423573</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02503537</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"ReturnTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114579481"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"OMG-ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"bittrex"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Valid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114579228"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">5.49</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.019857</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">13.62550123</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0197758</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01976677</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">6.92629385</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01970274</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">6.73770653</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02025768</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">7.49193537</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02025774</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.48831433</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02025781</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"ReturnTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114579575"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"PAY-ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"bittrex"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Valid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114579228"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">17.76916985</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00576079</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0057565</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">5.24</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.005728</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">136.4072</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00581225</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">776.223</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00583147</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">15.90915084</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00583148</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"ReturnTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114579574"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1514114582015"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-3'>HTTP request</h3>
+<p><code>GET http://example.com/prices</code></p>
+<h2 id='get-trade-history-for-an-account-signing-required'>Get trade history for an account (signing required)</h2><pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"http://localhost:8000/tradehistoryfromTime=1516116380102&amp;toTime=18446737278344972745"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"Version"</span><span class="p">:</span><span class="w"> </span><span class="mi">1517298257114</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Valid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1517298257115"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"binance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"EOS-ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"KNC-ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"548002"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.003038</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Qty"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1516116380102</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"548003"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0030384</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Qty"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1516116380102</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"548004"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.003043</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Qty"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1516116380102</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"548005"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0030604</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Qty"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1516116380102</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"548006"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.003065</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Qty"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1516116380102</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"548007"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.003065</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Qty"</span><span class="p">:</span><span class="w"> </span><span class="mi">130</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1516116380102</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"OMG-ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123980"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.020473</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Qty"</span><span class="p">:</span><span class="w"> </span><span class="mi">48</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1512395498231</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"130518"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.021022</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Qty"</span><span class="p">:</span><span class="w"> </span><span class="mf">13.49</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1512564108827</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"130706"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.020202</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Qty"</span><span class="p">:</span><span class="w"> </span><span class="mf">9.93</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sell"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1512569059460</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"140078"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.019098</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Qty"</span><span class="p">:</span><span class="w"> </span><span class="mf">11.07</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1512714826339</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"140157"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.019053</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Qty"</span><span class="p">:</span><span class="w"> </span><span class="mf">7.68</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sell"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1512716338997</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"295923"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.020446</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Qty"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1514360742162</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"SALT-ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"SNT-ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"bittrex"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"OMG-ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eb948865-6261-4991-8615-b36c8ccd1256"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01822057</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Qty"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">18446737278344972745</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"SALT-ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"SNT-ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET http://example.com/tradehistory</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>fromTime</td>
+<td>false</td>
+<td>0</td>
+<td>timestamp to get history from by millisecond</td>
+</tr>
+<tr>
+<td>toTime</td>
+<td>false</td>
+<td>0</td>
+<td>timestamp to get history to by millisecond</td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
+<aside class="notice">
+This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+</aside>
+
+<p>The Kittn API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request -- Your request is invalid.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized -- Your API key is wrong.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- The specified kitten could not be found.</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone -- The kitten requested has been removed from our servers.</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I&#39;m a teapot.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">shell</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
