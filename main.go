@@ -1,14 +1,19 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
+	"net/http"
+	"time"
 
 	"github.com/go-telegram-bot-api/telegram-bot-api"
 	"github.com/halink0803/telegram-unsplash-bot/common"
 	"github.com/halink0803/telegram-unsplash-bot/unsplash"
+	"google.golang.org/appengine"
+	"google.golang.org/appengine/urlfetch"
 )
 
 func readConfigFromFile(path string) (common.BotConfig, error) {
@@ -28,6 +33,8 @@ type Bot struct {
 }
 
 func main() {
+	log.SetFlags(log.LstdFlags | log.Lmicroseconds | log.Lshortfile)
+
 	configPath := "config.json"
 	botConfig, err := readConfigFromFile(configPath)
 	if err != nil {
@@ -35,7 +42,10 @@ func main() {
 	}
 
 	// init bot
-	bot, err := tgbotapi.NewBotAPI(botConfig.BotKey)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(5*time.Second))
+	defer cancel()
+	client := urlfetch.Client(ctx)
+	bot, err := tgbotapi.NewBotAPIWithClient(botConfig.BotKey, client)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -70,6 +80,20 @@ func main() {
 
 		// mybot.bot.Send(msg)
 	}
+	http.HandleFunc("/", handle)
+	appengine.Main()
+}
+
+func handle(w http.ResponseWriter, r *http.Request) {
+	ctx := appengine.NewContext(r)
+	client := urlfetch.Client(ctx)
+	resp, err := client.Get("https://www.google.com/")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	fmt.Fprintf(w, "HTTP GET returned status %v", resp.Status)
+	fmt.Fprintln(w, "Hello, world!")
 }
 
 func (mybot *Bot) handle(update tgbotapi.Update) {
