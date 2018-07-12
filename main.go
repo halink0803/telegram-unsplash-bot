@@ -5,11 +5,14 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"net/url"
 
 	"github.com/go-telegram-bot-api/telegram-bot-api"
 	"github.com/halink0803/telegram-unsplash-bot/common"
 	"github.com/halink0803/telegram-unsplash-bot/unsplash"
 )
+
+var currentCommand string
 
 func readConfigFromFile(path string) (common.BotConfig, error) {
 	data, err := ioutil.ReadFile(path)
@@ -78,6 +81,18 @@ func (mybot *Bot) handle(update tgbotapi.Update) {
 		case "search":
 			mybot.handleSearch(update)
 			break
+		case "authorize":
+			mybot.handleAuthorize(update)
+		default:
+			break
+		}
+	} else if update.CallbackQuery != nil {
+		mybot.handleCallbackQuery(update)
+	} else {
+		switch currentCommand {
+		case "authorize":
+			mybot.handleAuthorizeCode(update)
+			break
 		default:
 			break
 		}
@@ -120,4 +135,40 @@ func (mybot *Bot) handleSearch(update tgbotapi.Update) {
 		msg.ReplyMarkup = buttons
 		mybot.bot.Send(msg)
 	}
+}
+
+func (mybot *Bot) handleAuthorize(update tgbotapi.Update) {
+	//url to authorize user
+	reqURL, err := url.Parse("https://unsplash.com")
+	if err != nil {
+		log.Panic(err)
+	}
+	reqURL.Path += "/oauth/authorize"
+	params := url.Values{}
+	params.Add("client_id", mybot.unsplash.UnsplashKey())
+	params.Add("redirect_uri", "urn:ietf:wg:oauth:2.0:oob")
+	params.Add("response_type", "code")
+	reqURL.RawQuery = params.Encode()
+	reqURL.RawQuery += "&scope=public+write_likes+write_followers"
+
+	msgContent := fmt.Sprintf("Click following link to authorize then paste authorize code to the next message to authorize: %s", reqURL)
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, msgContent)
+	mybot.bot.Send(msg)
+	currentCommand = "authorize"
+}
+
+func (mybot *Bot) handleAuthorizeCode(update tgbotapi.Update) {
+	code := update.Message.Text
+	userID := update.Message.From.ID
+	err := mybot.unsplash.AuthorizeUser(code, userID)
+	if err != nil {
+		log.Panic(err)
+	}
+	msgContent := fmt.Sprint("You have successfully authorize your account.")
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, msgContent)
+	mybot.bot.Send(msg)
+}
+
+func (mybot *Bot) handleCallbackQuery(update tgbotapi.Update) {
+
 }
