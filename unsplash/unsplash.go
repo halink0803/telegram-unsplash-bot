@@ -2,12 +2,15 @@ package unsplash
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 	"time"
 
+	"github.com/KyberNetwork/reserve-data/exchange"
 	"github.com/halink0803/telegram-unsplash-bot/common"
 )
 
@@ -41,6 +44,72 @@ func NewUnsplash(unsplashKey, unsplashSecret string) *Unsplash {
 		unsplashKey:    unsplashKey,
 		unsplashSecret: unsplashSecret,
 	}
+}
+
+func (u *Unsplash) fillRequest(req *http.Request, signNeeded bool, token string) {
+	if req.Method == "POST" || req.Method == "PUT" || req.Method == "DELETE" {
+		req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	}
+	req.Header.Add("Accept", "application/json")
+	if signNeeded {
+		authorization := fmt.Sprintf("Bearer %s", token)
+		req.Header.Add("Authorization", authorization)
+		q := req.URL.Query()
+		sig := url.Values{}
+		req.URL.RawQuery = q.Encode() + "&" + sig.Encode()
+	}
+}
+
+func (u *Unsplash) getResponse(
+	method string, url string,
+	params map[string]string, signNeeded bool, token string) ([]byte, error) {
+	var (
+		err      error
+		respBody []byte
+	)
+	client := &http.Client{
+		Timeout: time.Duration(30 * time.Second),
+	}
+	req, err := http.NewRequest(method, url, nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Accept", "application/json")
+
+	q := req.URL.Query()
+	for k, v := range params {
+		q.Add(k, v)
+	}
+	req.URL.RawQuery = q.Encode()
+	u.fillRequest(req, signNeeded, token)
+
+	resp, err := client.Do(req)
+	if err != nil {
+		return respBody, err
+	}
+	defer func() {
+		if cErr := resp.Body.Close(); cErr != nil {
+			log.Printf("Response body close error: %s", cErr.Error())
+		}
+	}()
+	switch resp.StatusCode {
+	case 500:
+		err = errors.New("500 from Unsplash, its fault")
+		break
+	case 401:
+		err = errors.New("unsplash api key not valid")
+		break
+	case 200, 201, 204:
+		respBody, err = ioutil.ReadAll(resp.Body)
+		break
+	default:
+		var response exchange.Binaresp
+		if err = json.NewDecoder(resp.Body).Decode(&response); err != nil {
+			break
+		}
+		err = fmt.Errorf("Unsplash return with code: %d - %s", resp.StatusCode, response.Msg)
+	}
+	return respBody, err
 }
 
 //AuthorizeUser authorize user
@@ -94,14 +163,20 @@ func (u Unsplash) UnsplashKey() string {
 }
 
 //LikeAPhoto like a photo in unsplash
-func (u Unsplash) LikeAPhoto(photoID string) error {
-	requestURL := fmt.Sprintf("%s/photos/%s/like", endpoint, photoID)
-	contentType := "application/x-www-form-urlencoded"
-	resp, err := u.client.Post(requestURL, contentType, nil)
+func (u Unsplash) LikeAPhoto(photoID string, userID int) error {
+	url := fmt.Sprintf("%s/photos/%s/like", endpoint, photoID)
+	token := bearerToken[userID]
+	resp, err := u.getResponse(
+		"POST",
+		url,
+		map[string]string{},
+		true,
+		token,
+	)
 	if err != nil {
 		return err
 	}
-	log.Printf("Like response: %+v", resp)
+	log.Printf("%s", resp)
 	return nil
 }
 

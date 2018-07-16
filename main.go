@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/url"
+	"strings"
 
 	"github.com/go-telegram-bot-api/telegram-bot-api"
 	"github.com/halink0803/telegram-unsplash-bot/common"
@@ -60,12 +61,6 @@ func main() {
 	updates, err := mybot.bot.GetUpdatesChan(u)
 
 	for update := range updates {
-		if update.Message == nil {
-			continue
-		}
-
-		log.Printf("Updates:[%s] %s", update.Message.From.UserName, update.Message.Command())
-
 		mybot.handle(update)
 
 		// msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
@@ -76,7 +71,7 @@ func main() {
 }
 
 func (mybot *Bot) handle(update tgbotapi.Update) {
-	if update.Message.IsCommand() {
+	if update.Message != nil && update.Message.IsCommand() {
 		switch update.Message.Command() {
 		case "search":
 			mybot.handleSearch(update)
@@ -99,18 +94,20 @@ func (mybot *Bot) handle(update tgbotapi.Update) {
 	}
 }
 
-func inlineKeyboarButtons() tgbotapi.InlineKeyboardMarkup {
+func inlineKeyboarButtons(photoID string) tgbotapi.InlineKeyboardMarkup {
 	replyRow := []tgbotapi.InlineKeyboardButton{}
 	//like button
-	likeKeyboardButton := tgbotapi.NewInlineKeyboardButtonData("like", "like")
+	data := fmt.Sprintf("POST|%s", photoID)
+	likeKeyboardButton := tgbotapi.NewInlineKeyboardButtonData("like", data)
 	replyRow = append(replyRow, likeKeyboardButton)
 
 	//unlike button
-	unlikeKeyboardButton := tgbotapi.NewInlineKeyboardButtonData("unlike", "unlike")
+	data = fmt.Sprintf("DELETE|%s", photoID)
+	unlikeKeyboardButton := tgbotapi.NewInlineKeyboardButtonData("unlike", data)
 	replyRow = append(replyRow, unlikeKeyboardButton)
 
 	//download button
-	downloadKeyboardButton := tgbotapi.NewInlineKeyboardButtonData("download", "download")
+	downloadKeyboardButton := tgbotapi.NewInlineKeyboardButtonData("download", photoID)
 	replyRow = append(replyRow, downloadKeyboardButton)
 
 	buttons := tgbotapi.NewInlineKeyboardMarkup(replyRow)
@@ -131,7 +128,7 @@ func (mybot *Bot) handleSearch(update tgbotapi.Update) {
 	}
 	for _, photo := range results.Results {
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, photo.URLs.Regular)
-		buttons := inlineKeyboarButtons()
+		buttons := inlineKeyboarButtons(photo.ID)
 		msg.ReplyMarkup = buttons
 		mybot.bot.Send(msg)
 	}
@@ -167,8 +164,31 @@ func (mybot *Bot) handleAuthorizeCode(update tgbotapi.Update) {
 	msgContent := fmt.Sprint("You have successfully authorize your account.")
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, msgContent)
 	mybot.bot.Send(msg)
+	currentCommand = ""
+}
+
+func (mybot *Bot) likePhoto(photoID string, userID int) {
+	err := mybot.unsplash.LikeAPhoto(photoID, userID)
+	if err != nil {
+		log.Panic(err)
+	}
+}
+
+func (mybot *Bot) unlikePhoto(photoID string, userID int) {
+
 }
 
 func (mybot *Bot) handleCallbackQuery(update tgbotapi.Update) {
-
+	data := strings.Split(update.CallbackQuery.Data, "|")
+	action := data[0]
+	photoID := data[1]
+	userID := update.CallbackQuery.From.ID
+	switch action {
+	case "POST":
+		mybot.likePhoto(photoID, userID)
+		break
+	case "DELETE":
+		mybot.unlikePhoto(photoID, userID)
+		break
+	}
 }
