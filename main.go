@@ -129,7 +129,16 @@ func (mybot *Bot) handleSearch(update tgbotapi.Update) {
 		mybot.bot.Send(msg)
 	}
 	for _, photo := range results.Results {
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID, photo.URLs.Regular)
+		msgContent := ""
+		if photo.Description != "" {
+			msgContent = fmt.Sprintf("[%s](%s)\n", photo.Description, photo.URLs.Regular)
+		} else {
+			msgContent = fmt.Sprintf("[%s](%s)\n", arguments, photo.URLs.Regular)
+		}
+		msgContent += fmt.Sprintf("Author: [%s](%s)\n", photo.User.Name, photo.User.PortfolioURL)
+		msgContent += fmt.Sprintf("Likes: %d", photo.Likes)
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, msgContent)
+		msg.ParseMode = "Markdown"
 		buttons := inlineKeyboarButtons(photo.ID, photo.LikedByUser)
 		msg.ReplyMarkup = buttons
 		mybot.bot.Send(msg)

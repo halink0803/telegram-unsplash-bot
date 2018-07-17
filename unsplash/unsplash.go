@@ -128,7 +128,6 @@ func (u Unsplash) AuthorizeUser(code string, userID int) error {
 	req.Header.Add("Accept", "application/json")
 	req.URL.RawQuery = q.Encode()
 
-	log.Printf("request: %+v", req)
 	client := http.Client{
 		Timeout: time.Duration(5 * time.Second),
 	}
