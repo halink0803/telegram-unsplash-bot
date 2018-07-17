@@ -181,8 +181,20 @@ func (u Unsplash) LikeAPhoto(photoID string, userID int) error {
 }
 
 //UnlikeAPhoto unlike a photo if its previously liked
-func (u Unsplash) UnlikeAPhoto() error {
-	//TODO: implement it
+func (u Unsplash) UnlikeAPhoto(photoID string, userID int) error {
+	url := fmt.Sprintf("%s/photos/%s/like", endpoint, photoID)
+	token := bearerToken[userID]
+	resp, err := u.getResponse(
+		"DELETE",
+		url,
+		map[string]string{},
+		true,
+		token,
+	)
+	if err != nil {
+		return err
+	}
+	log.Printf("%s", resp)
 	return nil
 }
 

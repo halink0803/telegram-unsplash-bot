@@ -175,7 +175,10 @@ func (mybot *Bot) likePhoto(photoID string, userID int) {
 }
 
 func (mybot *Bot) unlikePhoto(photoID string, userID int) {
-
+	err := mybot.unsplash.UnlikeAPhoto(photoID, userID)
+	if err != nil {
+		log.Panic(err)
+	}
 }
 
 func (mybot *Bot) handleCallbackQuery(update tgbotapi.Update) {
