@@ -94,17 +94,19 @@ func (mybot *Bot) handle(update tgbotapi.Update) {
 	}
 }
 
-func inlineKeyboarButtons(photoID string) tgbotapi.InlineKeyboardMarkup {
+func inlineKeyboarButtons(photoID string, liked bool) tgbotapi.InlineKeyboardMarkup {
 	replyRow := []tgbotapi.InlineKeyboardButton{}
-	//like button
-	data := fmt.Sprintf("POST|%s", photoID)
-	likeKeyboardButton := tgbotapi.NewInlineKeyboardButtonData("like", data)
-	replyRow = append(replyRow, likeKeyboardButton)
-
-	//unlike button
-	data = fmt.Sprintf("DELETE|%s", photoID)
-	unlikeKeyboardButton := tgbotapi.NewInlineKeyboardButtonData("unlike", data)
-	replyRow = append(replyRow, unlikeKeyboardButton)
+	if liked {
+		//unlike button
+		data := fmt.Sprintf("DELETE|%s", photoID)
+		unlikeKeyboardButton := tgbotapi.NewInlineKeyboardButtonData("unlike", data)
+		replyRow = append(replyRow, unlikeKeyboardButton)
+	} else {
+		//like button
+		data := fmt.Sprintf("POST|%s", photoID)
+		likeKeyboardButton := tgbotapi.NewInlineKeyboardButtonData("like", data)
+		replyRow = append(replyRow, likeKeyboardButton)
+	}
 
 	//download button
 	downloadKeyboardButton := tgbotapi.NewInlineKeyboardButtonData("download", photoID)
@@ -128,7 +130,7 @@ func (mybot *Bot) handleSearch(update tgbotapi.Update) {
 	}
 	for _, photo := range results.Results {
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, photo.URLs.Regular)
-		buttons := inlineKeyboarButtons(photo.ID)
+		buttons := inlineKeyboarButtons(photo.ID, photo.LikedByUser)
 		msg.ReplyMarkup = buttons
 		mybot.bot.Send(msg)
 	}
@@ -186,12 +188,17 @@ func (mybot *Bot) handleCallbackQuery(update tgbotapi.Update) {
 	action := data[0]
 	photoID := data[1]
 	userID := update.CallbackQuery.From.ID
+	liked := true
 	switch action {
 	case "POST":
 		mybot.likePhoto(photoID, userID)
 		break
 	case "DELETE":
 		mybot.unlikePhoto(photoID, userID)
+		liked = false
 		break
 	}
+	editButtons := inlineKeyboarButtons(photoID, liked)
+	editButtonConfig := tgbotapi.NewEditMessageReplyMarkup(update.CallbackQuery.Message.Chat.ID, update.CallbackQuery.Message.MessageID, editButtons)
+	mybot.bot.Send(editButtonConfig)
 }

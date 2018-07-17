@@ -200,17 +200,22 @@ func (u Unsplash) UnlikeAPhoto(photoID string, userID int) error {
 
 //SearchPhotos return photo url
 func (u Unsplash) SearchPhotos(query string) (common.SearchResult, error) {
-	requestURL := fmt.Sprintf("%s/search/photos?query=%s&client_id=%s", endpoint, query, u.unsplashKey)
-	resp, err := u.client.Get(requestURL)
+	requestURL := fmt.Sprintf("%s/search/photos", endpoint)
+	resp, err := u.getResponse(
+		"GET",
+		requestURL,
+		map[string]string{
+			"query":     query,
+			"client_id": u.unsplashKey,
+		},
+		false,
+		"",
+	)
 	result := common.SearchResult{}
 	if err != nil {
 		return result, err
 	}
-	respBody, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return result, err
-	}
-	json.Unmarshal(respBody, &result)
+	json.Unmarshal(resp, &result)
 	return result, nil
 }
 
