@@ -4,10 +4,15 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/url"
 	"strings"
+	"time"
 
+	"github.com/apex/log"
+	"github.com/apex/log/handlers/cli"
+	"github.com/apex/log/handlers/graylog"
+	"github.com/apex/log/handlers/multi"
+	"github.com/go-stack/stack"
 	"github.com/go-telegram-bot-api/telegram-bot-api"
 	"github.com/halink0803/telegram-unsplash-bot/common"
 	"github.com/halink0803/telegram-unsplash-bot/unsplash"
@@ -34,14 +39,20 @@ type Bot struct {
 func main() {
 	configPath := "config.json"
 	botConfig, err := readConfigFromFile(configPath)
+	graylogHandler, _ := graylog.New("udp://127.0.0.1:12201")
+	log.SetHandler(multi.New(
+		cli.Default,
+		graylogHandler,
+	))
+
 	if err != nil {
-		log.Panic(err)
+		log.Fatal(err.Error())
 	}
 
 	// init bot
 	bot, err := tgbotapi.NewBotAPI(botConfig.BotKey)
 	if err != nil {
-		log.Panic(err)
+		log.Fatal(err.Error())
 	}
 	bot.Debug = true
 
@@ -53,7 +64,14 @@ func main() {
 		unsplash: unsplash,
 	}
 
-	log.Printf("Authorized on account %s", bot.Self.UserName)
+	for range time.Tick(time.Millisecond * 200) {
+		for range time.Tick(time.Millisecond * 200) {
+			log.Info("upload")
+			log.Info("upload complete")
+			log.Warn("upload retry")
+			log.WithError(fmt.Errorf("Error %+v", stack.Caller(0))).Error("Why no line number?")
+		}
+	}
 
 	u := tgbotapi.NewUpdate(0)
 	u.Timeout = 60
@@ -149,7 +167,7 @@ func (mybot *Bot) handleAuthorize(update tgbotapi.Update) {
 	//url to authorize user
 	reqURL, err := url.Parse("https://unsplash.com")
 	if err != nil {
-		log.Panic(err)
+		log.Fatal(err.Error())
 	}
 	reqURL.Path += "/oauth/authorize"
 	params := url.Values{}
@@ -170,7 +188,7 @@ func (mybot *Bot) handleAuthorizeCode(update tgbotapi.Update) {
 	userID := update.Message.From.ID
 	err := mybot.unsplash.AuthorizeUser(code, userID)
 	if err != nil {
-		log.Panic(err)
+		log.Fatal(err.Error())
 	}
 	msgContent := fmt.Sprint("You have successfully authorize your account.")
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, msgContent)
@@ -181,14 +199,14 @@ func (mybot *Bot) handleAuthorizeCode(update tgbotapi.Update) {
 func (mybot *Bot) likePhoto(photoID string, userID int) {
 	err := mybot.unsplash.LikeAPhoto(photoID, userID)
 	if err != nil {
-		log.Panic(err)
+		log.Fatal(err.Error())
 	}
 }
 
 func (mybot *Bot) unlikePhoto(photoID string, userID int) {
 	err := mybot.unsplash.UnlikeAPhoto(photoID, userID)
 	if err != nil {
-		log.Panic(err)
+		log.Fatal(err.Error())
 	}
 }
 
