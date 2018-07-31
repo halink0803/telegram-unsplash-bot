@@ -102,7 +102,7 @@ func (u *Unsplash) getResponse(
 		respBody, err = ioutil.ReadAll(resp.Body)
 		break
 	default:
-		err = fmt.Errorf("Unsplash return with code: %d - %s", resp.StatusCode, response.Msg)
+		err = fmt.Errorf("Unsplash return with code: %d", resp.StatusCode)
 	}
 	return respBody, err
 }
