@@ -10,7 +10,6 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/KyberNetwork/reserve-data/exchange"
 	"github.com/halink0803/telegram-unsplash-bot/common"
 )
 
@@ -103,10 +102,6 @@ func (u *Unsplash) getResponse(
 		respBody, err = ioutil.ReadAll(resp.Body)
 		break
 	default:
-		var response exchange.Binaresp
-		if err = json.NewDecoder(resp.Body).Decode(&response); err != nil {
-			break
-		}
 		err = fmt.Errorf("Unsplash return with code: %d - %s", resp.StatusCode, response.Msg)
 	}
 	return respBody, err
