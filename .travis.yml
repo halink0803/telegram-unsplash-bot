@@ -11,4 +11,4 @@ script:
   - go test -race -coverprofile=coverage.txt -covermode=atomic
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) -t 6b2177fd-70ef-44ec-b6f6-104ee393a0e3
